@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/etapa.visita.css" />
+    <link rel="stylesheet" type="text/css" href="css/etapa.visita.sucesso.css" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center mt-0">
+            <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                    <div class="row">
+                        <div class="col-md-12 mx-0">
+                            <form id="msform" method="post" action="msform">
+                                <ul id="progressbar"><span class="step primeiro"></span><span class="step"></span><span class="step"></span></ul>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <center>Teste de Etapa do tipo Lista com Texto
+                                            <table id="Teste de Etapa do tipo Lista com Texto" name="Teste de Etapa do tipo Lista com Texto" class="table_custom">
+                                                <tr>
+                                                    <td>SEM TRIGO TBIO ENERGIA
+                                                        <input maxlength="300" id="SEM TRIGO TBIO ENERGIA" class="required" placeholder="texto" type="text" oninput="this.className = ''" name="SEM TRIGO TBIO ENERGIA" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>TBIO SINUELO
+                                                        <input maxlength="300" id="TBIO SINUELO" class="required" placeholder="texto" type="text" oninput="this.className = ''" name="TBIO SINUELO" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </center>
+                                    </div>
+                                    <input type="button" name="next" class="next action-button" value="Próximo" />
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <center>
+                                            <table id="Etapa Oracle 2" name="Etapa Oracle 2" class="table_custom">
+                                                <tr>
+                                                    <td>Etapa Oracle 2
+                                                        <input maxlength="300" id="Etapa Oracle 2" class="required" type="number" name="Etapa Oracle 2" placeholder="Etapa Oracle 2" /> </td>
+                                                </tr>
+                                            </table>
+                                        </center>
+                                    </div>
+                                    <input type="button" name="previous" class="previous action-button-previous" value="Voltar" />
+                                    <input type="button" name="next" class="next action-button" value="Próximo" />
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <center>
+                                            <table id="Teste selecao sem Texto" name="Teste selecao sem Texto" class="table_custom">
+											Teste selecao sem Texto
+											<tr><td>
+											<select multiple id="Teste selecao sem Texto[]" name="Teste selecao sem Texto[]" class="required custom-dropdown big multipla"> 
+											<option name="SEM TRIGO TBIO ENERGIA" id="SEM TRIGO TBIO ENERGIA" value="SEM TRIGO TBIO ENERGIA">SEM TRIGO TBIO ENERGIA</option>
+											<option name="TBIO SINUELO" id="TBIO SINUELO" value="TBIO SINUELO">TBIO SINUELO</option>
+											</select></td></tr></table>
+                                        </center>
+                                    </div>
+                                    <input type="button" name="previous" class="previous action-button-previous" value="Voltar" />
+                                    <input type="button" name="submit" class="action-button next submit" value="Confirmar" />
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <center>
+                                            <div class="circle-loader">
+                                                <div class="checkmark error"></div>
+                                            </div>
+                                        </center>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="js/etapa.visita.js" type="text/javascript"></script>
+<script>
+	var data = {"Teste de Etapa do tipo Lista com Texto": [{"name":"SEM TRIGO TBIO ENERGIA","value":"Valor 1"},{"name":"TBIO SINUELO","value":"Valor 2"}],"Etapa Oracle 2": [{"name":"Etapa Oracle 2","value":"45"}],"Teste selecao sem Texto": [{"name":"TBIO SINUELO","value":"TBIO SINUELO"}]};
+                myObj = data;
+                for (a in myObj) {
+                    if (a !== undefined) {										
+                        elemento = document.getElementById(a);	
+						//console.log(document);
+						nomeTabela = elemento.getAttribute('name');
+						idTabela = elemento.getAttribute('id');
+						var tabela = document.getElementById(idTabela);	
+						$(tabela).each(function(i) {
+							x = $(this).children();
+							$(x.children()).each(function(i) {
+								y = $(this).children();
+								elemento = y.children()[0];									
+								for (b in myObj[a]) {
+									valor = myObj[a][b].value;
+									nome = myObj[a][b].name;									
+									if (elemento !== null) {
+										console.log(elemento.type);
+										if (elemento.type == "select-multiple") {
+											for(h=0; h< $('option').length; h++){
+												if($('option').eq(h)[0].getAttribute("name") == nome){
+													$('option').eq(h).prop('selected', true);
+													$('option').eq(h).addClass("selected");
+												}
+											}																																								
+										}else{				
+											if(elemento.getAttribute('name') == nome){
+												elemento.value = valor;						
+												elemento.classList.remove("required");
+											}
+										}
+									}
+								}						 	
+																
+							});							
+						});					
+                    }
+                }
+</script>
+
+
+</html>
